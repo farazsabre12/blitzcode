@@ -1,0 +1,123 @@
+Input: I want to go on a economy class AA or UA direct flight from SIN to LHR on 24th july TO 23 Aug.
+ I want a comfy seat with extra leg room, some snacks or meal. It should be in policy and refundable.
+
+Output:
+{
+    "FailureReason": "null",
+    "Response": {
+        "Air": {
+            "arrivalDate": "23/08/2024",
+            "departureDate": "24/07/2024",
+            "destinationCityCode": "LHR",
+            "filter_category": {
+                "airline": [
+                    "AA",
+                    "UA"
+                ],
+                "cabin_class": "coach",
+                "flexibility": "refundable_fare",
+                "in-policy": true,
+                "meal_type": "LIGHT_MEAL",
+                "seat_type": [
+                    "ABOVE_AVERAGE_LEGROOM"
+                ],
+                "stops": "nonstop"
+            },
+            "originCityCode": "SIN",
+            "searchType": "round-trip"
+        },
+        "Car": {},
+        "Hotel": {}
+    },
+    "isValid": true
+}
+
+Input:
+I want to go on a economy class.
+
+Output:
+{
+    "FailureReason": "One or more of the following fields are missing, please mention these details. Missing: originCityCode, destinationCityCode, departureDate, searchType",
+    "Response": {
+        "Air": {
+            "arrivalDate": "null",
+            "arrivalTime": "null",
+            "departureDate": "null",
+            "departureTime": "null",
+            "destinationCityCode": "null",
+            "originCityCode": "null",
+            "searchType": "null"
+        },
+        "Car": {
+            "date": "null",
+            "destination": "null",
+            "source": "null"
+        },
+        "Hotel": {
+            "checkinDate": "null",
+            "checkoutDate": "null",
+            "city": "null"
+        }
+    },
+    "isValid": false
+}
+
+Input:
+I want to go to Sydney.
+
+Output:
+{
+    "FailureReason": "One or more of the following fields are missing, please mention these details. Missing: originCityCode, departureDate",
+    "Response": {
+        "Air": {
+            "arrivalDate": "null",
+            "arrivalTime": "null",
+            "departureDate": "null",
+            "departureTime": "null",
+            "destinationCityCode": "SYD",
+            "originCityCode": "null",
+            "searchType": "one-way"
+        },
+        "Car": {
+            "date": "null",
+            "destination": "null",
+            "source": "null"
+        },
+        "Hotel": {
+            "checkinDate": "null",
+            "checkoutDate": "null",
+            "city": "null"
+        }
+    },
+    "isValid": false
+}
+
+Input:
+I want to go and come back to Sydney on 21st aug from Rio de Janeiro.
+
+Output:
+{
+    "FailureReason": "One or more of the following fields are missing, please mention these details. Missing: arrivalDate",
+    "Response": {
+        "Air": {
+            "arrivalDate": "null",
+            "arrivalTime": "null",
+            "departureDate": "21/08/2024",
+            "departureTime": "null",
+            "destinationCityCode": "SYD",
+            "originCityCode": "GIG",
+            "searchType": "round-trip"
+        },
+        "Car": {
+            "date": "null",
+            "destination": "null",
+            "source": "null"
+        },
+        "Hotel": {
+            "checkinDate": "null",
+            "checkoutDate": "null",
+            "city": "null"
+        }
+    },
+    "isValid": false
+}

@@ -1,0 +1,136 @@
+Here are few examples that you can use:
+Example 1
+Input: I want to go on a economy class AA or UA direct flight from SIN to LHR on 24th july TO 23 Aug.
+ I want a comfy seat with extra leg room, some snacks or meal. It should be in policy and refundable.
+
+Extracted Output:
+{
+    "FailureReason": "",
+    "Response": {
+        "Air": {
+            "inboundFlight": {
+                "departureDate": "24/07/2024",
+                "departureTime": "null"
+            },
+            "outboundFlight": {
+                "departureDate": "23/08/2024",
+                "departureTime": "null"
+            },
+            "destinationCityCode": "LHR",
+            "filterCategory": {
+                "airline": [
+                    "AA",
+                    "UA"
+                ],
+                "cabinClass": "coach",
+                "flexibility": "refundable_fare",
+                "in-policy": true,
+                "mealType": "LIGHT_MEAL",
+                "seatType": [
+                    "ABOVE_AVERAGE_LEGROOM"
+                ],
+                "stops": "nonstop"
+            },
+            "originCityCode": "SIN",
+            "searchType": "round-trip"
+        },
+        "Car": {},
+        "Hotel": {}
+    },
+    "isValid": true
+}
+
+Example 2
+Input:
+I want to go on a economy class.
+
+Extracted Output:
+{
+    "FailureReason": "One or more of the following fields are missing, please mention these details. Missing: originCityCode, destinationCityCode, departureDate, searchType",
+    "Response": {
+        "Air": {},
+        "Car": {},
+        "Hotel": {}
+    },
+    "isValid": false
+}
+
+Example 3
+Input:
+I want to go to Sydney.
+
+Extracted Output:
+{
+    "FailureReason": "One or more of the following fields are missing, please mention these details. Missing: originCityCode, departureDate",
+    "Response": {
+        "Air": {},
+        "Car": {},
+        "Hotel": {}
+    },
+    "isValid": false
+}
+
+Example 4
+Input:
+I want to go and come back to Sydney on 21st aug from Rio de Janeiro.
+
+Extracted Output:
+{
+    "FailureReason": "One or more of the following fields are missing, please mention these details. Missing: arrivalDate",
+    "Response": {
+        "Air": {},
+        "Car": {},
+        "Hotel": {}
+    },
+    "isValid": false
+}
+
+Example 5
+Input:
+Find me a flight from mexico to los angeles
+
+Extracted Output:
+{
+    "FailureReason": ""
+    "Response": {
+        "Air": {
+            "destinationCityCode": "LAX",
+            "filterCategory": {},
+            "originCityCode": "MEX",
+            "outboundFlight": {
+                "departureDate": "03/08/2024",
+                "departureTime": "null"
+            },
+            "searchType": "one-way"
+        },
+        "Car": {},
+        "Hotel": {}
+    },
+    "isValid": true
+}
+
+Example 5:
+Input: Show me flights from paris to new york on dec 3rd with in flight entertainment and priority boarding
+
+Extracted Output:
+{
+    "FailureReason": "",
+    "Response": {
+        "Air": {
+            "destinationCityCode": "JFK",
+            "filterCategory": {
+                "entertainmentType": "ON_DEMAND",
+                "priorityBoarding": "APPLICABLE_FREE"
+            },
+            "originCityCode": "CDG",
+            "outboundFlight": {
+                "departureDate": "01/12/2024",
+                "departureTime": "null"
+            },
+            "searchType": "round-trip"
+        },
+        "Car": {},
+        "Hotel": {}
+    },
+    "isValid": true
+}

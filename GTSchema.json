@@ -1,0 +1,236 @@
+{
+  "type": "OBJECT",
+  "properties": {
+    "isValid": {
+      "type": "BOOLEAN",
+      "description": "Evaluate the prompt based on the travel context and validate if the prompt is relevant to travel context. Validate if this is atleast either a flight/hotel/car search. Return false if the mandatory fields are missing."
+    },
+    "Response": {
+      "type": "OBJECT",
+      "description": "Populate this only if the isValid field is true",
+      "properties": {
+        "Air": {
+          "type": "OBJECT",
+          "description": "All flight details",
+          "properties": {
+            "originCityCode": {
+              "description": "Airport code of source city. Use IATA standard for city codes",
+              "type": "STRING"
+            },
+            "destinationCityCode": {
+              "description": "Airport code of destination city. Use IATA standard for city codes",
+              "type": "STRING"
+            },
+            "outboundFlight": {
+              "type": "OBJECT",
+              "description": "Departure and arrival details for outbound flight",
+              "properties": {
+                "departureDate": {
+                  "description": "Departure date in dd/mm/yyyy. Date on which outbound flight leaves/departs.",
+                  "type": "string"
+                },
+                "departureTime": {
+                  "description": "Departure time in HH:mm. Specify only if mentioned. Time at which outbound flight leaves/departs",
+                  "type": "string"
+                },
+                "arrivalDate": {
+                  "description": "Arrival date in dd/mm/yyyy. Date on which the outbound flight arrives. Default is same as departure Date",
+                  "type": "string"
+                },
+                "arrivalTime": {
+                  "description": "Arrival time in HH:mm. Specify only if mentioned. Time at which outbound flight arrives on the arrival date",
+                  "type": "string"
+                }
+              }
+            },
+            "inboundFlight": {
+              "type": "OBJECT",
+              "description": "Departure and arrival details for inbound/return flight. Populate this only if searchType is round trip because round trip should have inbound flight details",
+              "properties": {
+                "departureDate": {
+                  "description": "Departure date in dd/mm/yyyy. Date on which inbound/return flight leaves/departs",
+                  "type": "string"
+                },
+                "departureTime": {
+                  "description": "Departure time in HH:mm. Specify only if mentioned. Time at which the inbound/return flight leaves/departs",
+                  "type": "string"
+                },
+                "arrivalDate": {
+                  "description": "Arrival date in dd/mm/yyyy. Date on which the inbound/return flight arrives. Default is same as departure Date",
+                  "type": "string"
+                },
+                "arrivalTime": {
+                  "description": "Arrival time in HH:mm. Specify only if mentioned. Time at which inbound/return flight arrives on the arrival date",
+                  "type": "string"
+                }
+              }
+            },
+            "searchType": {
+              "description": "one way flight or round trip flight. If round trip, populate inboundFlight value too",
+              "type": "string",
+              "enum": [
+                "one-way",
+                "round-trip"
+              ]
+            },
+            "filterCategory": {
+              "description": "ways to filter out and display only relevant flight options",
+              "type": "OBJECT",
+              "properties": {
+                "in-policy": {
+                  "description": "itineraries that are in-policy",
+                  "type": "Boolean"
+                },
+                "airline": {
+                  "description": "2 letter IATA airline codes",
+                  "type": "String"
+                },
+                "price": {
+                  "description": "price range for flights. Keep it realistic prices for flights. Populate only if requested",
+                  "type": "OBJECT",
+                  "properties": {
+                    "upper-limit": {
+                      "description": "upper-limit for price of flight",
+                      "type": "INTEGER"
+
+                    },
+                    "lower-limit": {
+                      "description": "lower-limit for price of flight",
+                      "type": "INTEGER"
+                    },
+                    "currency": {
+                      "description": "currency format for price range. Default USD",
+                      "type": "STRING"
+                    }
+                  }
+
+                },
+                "stops": {
+                  "description": "number of stops allowed in the flight journey",
+                  "type": "STRING",
+                  "enum": [
+                    "nonstop",
+                    "1-stop",
+                    "multi-stop",
+                    "select_all"
+                  ]
+
+                },
+                "cabinClass": {
+                  "description": "preferred cabin class in the flight",
+                  "type": "STRING",
+                  "enum": [
+                    "coach",
+                    "premium_economy",
+                    "business",
+                    "first",
+                    "select_all"
+                  ]
+
+                },
+                "seatType": {
+                  "description": "preferred seat comfort type",
+                  "type": "STRING",
+                  "enum": [
+                      "MIDDLE_SEAT_FREE",
+                      "STANDARD_LEGROOM",
+                      "BELOW_AVERAGE_LEGROOM",
+                      "ABOVE_AVERAGE_LEGROOM",
+                      "SKYCOUCH",
+                      "RECLINER_SEAT",
+                      "FULL_FLAT_SEAT",
+                      "FULL_FLAT_POD",
+                      "PRIVATE_SUITE",
+                      "ANGLE_FLAT_SEAT",
+                      "CRADLE_RECLINER"
+                  ]
+                },
+                "mealType": {
+                  "description": "meal types",
+                  "type": "STRING",
+                  "enum": [
+                      "LIGHT_MEAL",
+                      "MEAL",
+                      "PREMIUM_MEAL",
+                      "SNACK",
+                      "PREMIUM_SNACK"
+                  ]
+                },
+                "entertainmentType": {
+                  "description": "entertainment types",
+                  "type": "STRING",
+                  "enum": [
+                    "LIVETV",
+                    "ON_DEMAND",
+                    "PRE_DOWNLOAD",
+                    "STREAMING",
+                    "OVERHEAD",
+                    "TABLET"
+                  ]
+                },
+                "flexibility": {
+                  "description": "fare flexibility",
+                  "type": "STRING",
+                  "enum": [
+                    "changeable_fare",
+                    "refundable_fare"
+                  ]
+                },
+                "priorityBoarding": {
+                  "description": "user is given priority boarding",
+                  "type": "STRING",
+                  "enum": [
+                    "APPLICABLE_FREE",
+                    "CHARGEABLE_OR_NOT_APPLICABLE"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "Hotel": {
+          "type": "OBJECT",
+          "description": "All hotel details",
+          "properties": {
+            "city": {
+              "description": "airport code of hotel city",
+              "type": "STRING"
+            },
+            "checkinDate": {
+              "description": "check in date in dd/mm/yyyy",
+              "type": "string"
+            },
+            "checkoutDate": {
+              "description": "checkout date in dd/mm/yyyy",
+              "type": "string"
+            }
+          }
+        },
+        "Car": {
+          "type": "OBJECT",
+          "description": "All cab details",
+          "properties": {
+            "source": {
+              "description": "address of source",
+              "type": "STRING"
+            },
+            "destination": {
+              "description": "address of destination",
+              "type": "STRING"
+            },
+            "date": {
+              "description": "pickup date in dd/mm/yyyy",
+              "type": "STRING"
+            }
+          }
+        }
+      },
+      "required": ["Air", "Hotel", "Car"]
+    },
+    "FailureReason": {
+      "type": "STRING",
+      "description": "Populate this with the reason only if the isValid field is false"
+    }
+  },
+  "required": ["isValid", "Response", "FailureReason"]
+}
